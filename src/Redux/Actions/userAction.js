@@ -55,7 +55,7 @@ export const getUser =  (token) => {
 
 export const login = (user) => {
   return dispatch => {
-    // dispatch(loginUserPending());
+    dispatch(loginUserPending());
     return fetch('https://now-playing-zip.herokuapp.com/api/v1/login', {
       method: 'POST',
       headers: {
