@@ -8,9 +8,11 @@ class MoviesContainer extends Component {
 
   moviePosters = () => {
     let posterObj = {};
-    this.props.nowPlaying.forEach(movie => {
-      posterObj[movie.title] = `http://image.tmdb.org/t/p/w185/${movie.poster_path}`
-    });
+    if(Array.isArray(this.props.nowPlaying)) {
+      this.props.nowPlaying.forEach(movie => {
+        posterObj[movie.title] = `http://image.tmdb.org/t/p/w185/${movie.poster_path}`
+      });
+    }
     return posterObj
   };
 
