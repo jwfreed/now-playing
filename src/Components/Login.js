@@ -33,7 +33,7 @@ class Login extends Component {
         <Container id='log'>
          <Segment textAlign='center' id='form'>
            <h1>Login</h1>
-              <Form onSubmit={this.submitHandler} textAlign='center'>
+              <Form onSubmit={this.submitHandler} >
                  <Form.Input label='Username' icon='user' iconPosition='left' type="text" placeholder="username" value={username} name="username" onChange={this.changeHandler}/>
                  <Form.Input label='Password' icon='lock' iconPosition='left' type="password" placeholder="password" value={password} name="password" onChange={this.changeHandler}/>
                  <Form.Button color='green' content="Login"/>
