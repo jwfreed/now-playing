@@ -1,5 +1,6 @@
 const moviesUrl = 'https://now-playing-zip.herokuapp.com/api/v1/movies'
 
+// future user comments feature for fetching persisted films and setting state 
 export const backendMovies = (movies) => ({type: 'BACKEND_MOVIES', payload: movies})
 
 export const getBackendMovies = () => {
@@ -17,6 +18,8 @@ export const getBackendMovies = () => {
   }
 };
 
+
+// for fetching films, theaters, and showtimes in a given zip code and radius and persisting films
 export const getMovies = (moviesData) => ({type: 'GET_MOVIES', payload: moviesData});
 
 export const zipMovies =  (zipCode, zipRadius) => {
@@ -32,7 +35,6 @@ export const zipMovies =  (zipCode, zipRadius) => {
     .then(r => r.json())
     .then(moviesData => dispatch(getMovies(moviesData)))
     .then(moviesData => persistMovies(moviesData))
-        // .then(movies => )
   }
 };
 
@@ -51,6 +53,7 @@ const persistMovies = (moviesData) => {
   })
 };
 
+// fetch for film posters to add to list of currently queried films 
 export const selectMovie = (movie) => ({type: 'SELECT_MOVIE', payload: movie});
 
 export const addPlaying = (nowPlaying) => ({type: 'ADD_PLAYING', payload: nowPlaying});
