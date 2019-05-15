@@ -23,8 +23,7 @@ export const createUser = (newUser) => {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'accepts': 'application/json',
-        Authorization: `Bearer ${token}`
+        'accepts': 'application/json'
       },
       body: JSON.stringify({user: newUser})
     })
