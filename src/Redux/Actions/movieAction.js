@@ -29,7 +29,7 @@ export const getMovies = (moviesData) => ({type: 'GET_MOVIES', payload: moviesDa
 export const zipMovies =  (zipCode, zipRadius) => {
   return dispatch => {
     let currentDate = new Date().toISOString().slice(0,10);
-    return fetch(`http://data.tmsapi.com/v1.1/movies/showings?startDate=${currentDate}&zip=${zipCode}&radius=${zipRadius}&api_key=${tmsAPIkey}`, {
+    return fetch(`http://data.tmsapi.com/v1.1/movies/showings?startDate=${currentDate}&zip=${zipCode}&radius=${zipRadius}&api_key=n7ayt2hunx3vufxu54n39c3r`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
@@ -65,7 +65,7 @@ export const addPlaying = (nowPlaying) => ({type: 'ADD_PLAYING', payload: nowPla
 
 export const getNowPlaying = () => {
   return dispatch => {
-    return fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbAPIkey}&language=en-US&page=1`)
+    return fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=4c53dedffd167cd81072650ce5741635&language=en-US&page=1`)
     .then(r => r.json())
     .then(nowPlaying => dispatch(addPlaying(nowPlaying.results)))
     .catch(console.error)
@@ -76,7 +76,7 @@ export const addPlayingTwo = (nowPlaying) => ({type: 'ADD_PLAYING_TWO', payload:
 
 export const getNowPlayingTwo = () => {
   return dispatch => {
-    return fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbAPIkey}&language=en-US&page=2`)
+    return fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=4c53dedffd167cd81072650ce5741635&language=en-US&page=2`)
     .then(r => r.json())
     .then(nowPlaying => dispatch(addPlayingTwo(nowPlaying.results)))
     .catch(console.error)
@@ -87,7 +87,7 @@ export const addPlayingThree = (nowPlaying) => ({type: 'ADD_PLAYING_THREE', payl
 
 export const getNowPlayingThree = () => {
   return dispatch => {
-    return fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbAPIkey}&language=en-US&page=3`)
+    return fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=4c53dedffd167cd81072650ce5741635&language=en-US&page=3`)
     .then(r => r.json())
     .then(nowPlaying => dispatch(addPlayingThree(nowPlaying.results)))
     .catch(console.error)
