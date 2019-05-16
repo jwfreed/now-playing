@@ -29,7 +29,7 @@ export const getMovies = (moviesData) => ({type: 'GET_MOVIES', payload: moviesDa
 export const zipMovies =  (zipCode, zipRadius) => {
   return dispatch => {
     let currentDate = new Date().toISOString().slice(0,10);
-    return fetch(`//data.tmsapi.com/v1.1/movies/showings?startDate=${currentDate}&zip=${zipCode}&radius=${zipRadius}&api_key=${tmsAPIkey}`, {
+    return fetch(`http://data.tmsapi.com/v1.1/movies/showings?startDate=${currentDate}&zip=${zipCode}&radius=${zipRadius}&api_key=${tmsAPIkey}`, {
       method: 'GET',
       headers: {
         'content-type': 'application/json',
