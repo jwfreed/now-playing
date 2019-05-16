@@ -1,8 +1,8 @@
 const moviesUrl = 'https://now-playing-zip.herokuapp.com/api/v1/movies'
 
-const tmsAPIkey = process.env.TMS_API_KEY
+const tmsAPIkey = process.env.REACT_APP_TMS_API_KEY
 
-const tmdbAPIkey = process.env.THEMOVIEDB_API_KEY
+const tmdbAPIkey = process.env.REACT_APP_THEMOVIEDB_API_KEY
 
 // future user comments feature for fetching persisted films and setting state 
 export const backendMovies = (movies) => ({type: 'BACKEND_MOVIES', payload: movies})
