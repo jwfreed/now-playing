@@ -39,6 +39,7 @@ export const zipMovies =  (zipCode, zipRadius) => {
     .then(r => r.json())
     .then(moviesData => dispatch(getMovies(moviesData)))
     .then(moviesData => persistMovies(moviesData))
+    .catch(console.error)
   }
 };
 
