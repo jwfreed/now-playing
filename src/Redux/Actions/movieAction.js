@@ -10,7 +10,7 @@ export const zipMovies = (zipCode, zipRadius) => {
   return dispatch => {
     let currentDate = new Date().toISOString().slice(0, 10);
     return fetch(
-      `http://data.tmsapi.com/v1.1/movies/showings?startDate=${currentDate}&zip=${zipCode}&radius=${zipRadius}&api_key=${tmsAPIkey}`,
+      `https://data.tmsapi.com/v1.1/movies/showings?startDate=${currentDate}&zip=${zipCode}&radius=${zipRadius}&api_key=${tmsAPIkey}`,
       {
         method: 'GET',
         headers: {
@@ -36,7 +36,7 @@ export const addPlaying = nowPlaying => ({
 export const getNowPlaying = () => {
   return dispatch => {
     return fetch(
-      `http://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbAPIkey}&language=en-US&page=1`
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbAPIkey}&language=en-US&page=1`
     )
       .then(r => r.json())
       .then(nowPlaying => dispatch(addPlaying(nowPlaying.results)))
@@ -52,7 +52,7 @@ export const addPlayingTwo = nowPlaying => ({
 export const getNowPlayingTwo = () => {
   return dispatch => {
     return fetch(
-      `http://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbAPIkey}&language=en-US&page=2`
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbAPIkey}&language=en-US&page=2`
     )
       .then(r => r.json())
       .then(nowPlaying => dispatch(addPlayingTwo(nowPlaying.results)))
@@ -68,7 +68,7 @@ export const addPlayingThree = nowPlaying => ({
 export const getNowPlayingThree = () => {
   return dispatch => {
     return fetch(
-      `http://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbAPIkey}&language=en-US&page=3`
+      `https://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbAPIkey}&language=en-US&page=3`
     )
       .then(r => r.json())
       .then(nowPlaying => dispatch(addPlayingThree(nowPlaying.results)))
