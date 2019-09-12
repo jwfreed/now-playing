@@ -1,105 +1,76 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Header, Segment, Comment, Form, Button } from 'semantic-ui-react';
-import Comments from './Comments';
-import { persistComment, getAllComments } from '../Redux/Actions/commentAction';
+import { Header, Segment } from 'semantic-ui-react';
 
 class SelectedMovie extends Component {
-
-  state = {
-    addComment: ""
-  }
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+  moviePosters = () => {
+    let posterObj = {};
+    this.props.nowPlaying.results.forEach(movie => {
+      posterObj[
+        movie.title
+      ] = `http://image.tmdb.org/t/p/w185/${movie.poster_path}`;
+    });
+    return posterObj;
   };
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-    let comment = this.state
-    // console.log('persistComment', this.props.user.user.username, this.props.selectedMovie.title, comment.addComment)
-    console.log(this.props)
-    this.props.persistComment({username:this.props.user.user.username, title:this.props.selectedMovie.title, comment:comment.addComment}).then(r => this.props.getAllComments())
-    this.setState({
-      addcomment: ''
-    })
-  }
-
-  // movie poster for
-  // moviePosters = () => {
-  //   let posterObj = {};
-  //   this.props.nowPlaying.results.forEach(movie => {
-  //     posterObj[movie.title] = `http://image.tmdb.org/t/p/w185/${movie.poster_path}`
-  //   });
-  //   return posterObj
-  // };
 
   getMovieShowtimes = () => {
     let movieShowtimes = {};
     this.props.selectedMovie.showtimes.forEach(theatre => {
-      if(movieShowtimes.hasOwnProperty([theatre.theatre.name])){
-      movieShowtimes[theatre.theatre.name].push(theatre.dateTime)
+      if (movieShowtimes.hasOwnProperty([theatre.theatre.name])) {
+        movieShowtimes[theatre.theatre.name].push(theatre.dateTime);
       } else {
-        movieShowtimes[theatre.theatre.name] = [theatre.dateTime]
+        movieShowtimes[theatre.theatre.name] = [theatre.dateTime];
       }
     });
-    return movieShowtimes
+    return movieShowtimes;
   };
 
-  render(){
-    // let posters = this.moviePosters();
+  render() {
     let theatreShowtimes = this.getMovieShowtimes();
     let times = [];
-    for(let key in theatreShowtimes){
+    // eslint-disable-next-line
+    for (let key in theatreShowtimes) {
       times.push(
-          <h3>
-           {key}: {theatreShowtimes[key].map(time => new Date(time).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'})).join(', ')}
-          </h3>)
+        <h3>
+          {key}:{' '}
+          {theatreShowtimes[key]
+            .map(time =>
+              new Date(time).toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit'
+              })
+            )
+            .join(', ')}
+        </h3>
+      );
     }
 
-    let { addComment } = this.state
-    let { allComments, selectedMovie, backendMovies } = this.props
+    let { selectedMovie } = this.props;
 
-    let commentsArray = allComments.map(comment => <Comments key={comment.id} comment={comment}/>)
-
-    return(
-        <Segment id='selectedmovie'>
-          {/*<Image src={posters[movie.title.replace("3D", "").trim()]} size='small' floated='right'/>*/}
-          <Header size='huge'>{this.props.selectedMovie.title}</Header>
-          <Header size='large'>Directed by:</Header>
-            <h3>{this.props.selectedMovie.directors.join(', ')}</h3>
-          <Header size='large'>Starring:</Header>
-            <h3> {this.props.selectedMovie.topCast.join(', ')}</h3>
-          <Header size='large'>Synopsis:</Header>
-            <h3>{this.props.selectedMovie.longDescription}</h3>
-          <Header size='large'>Genre(s):</Header>
-            <h3>{this.props.selectedMovie.genres.join(', ')}</h3>
-          <Header size='large'>Now Showing at:</Header>
-            <h3>{times}</h3>
-          <Header size='large'>Have you seen {this.props.selectedMovie.title}?</Header>
-          <Comment.Group>
-            {commentsArray}
-          </Comment.Group>
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Input label="Tell us about it!" type="text" placeholder="add comment" name="addComment" value={addComment} onChange={this.handleChange}/>
-            <Button content='Add Comment' labelPosition='left' icon='edit' color='purple'/>
-          </Form>
-        </Segment>
-    )
+    return (
+      <Segment id='selectedmovie'>
+      <Header size='huge'>{selectedMovie.title}</Header>
+      <Header size='medium'>Directed by:</Header>
+      <p>{selectedMovie.directors.join(', ')}</p>
+      <Header size='medium'>Starring:</Header>
+      <p> {selectedMovie.topCast.join(', ')}</p>
+      <Header size='medium'>Synopsis:</Header>
+      <p>{selectedMovie.longDescription}</p>
+      <Header size='medium'>Genre(s):</Header>
+      <p>{selectedMovie.genres.join(', ')}</p>
+      <Header size='medium'>Now Playing at:</Header>
+      <p>{times}</p>
+    </Segment>
+    );
   }
 }
 
-const mapState = (state) => {
+const mapState = state => {
   return {
     loadedMovies: state.movieData.loadedMovies,
-    selectedMovie: state.movieData.selectedMovie,
-    backendMovies: state.movieData.backendMovies,
-    allComments: state.commentData.allComments,
-    user: state.userData.user
-  }
+    selectedMovie: state.movieData.selectedMovie
+  };
 };
 
-export default withRouter(connect(mapState, {persistComment, getAllComments})(SelectedMovie));
+export default withRouter(connect(mapState)(SelectedMovie));

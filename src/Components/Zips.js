@@ -7,14 +7,14 @@ import '../App.css';
 
 class Zips extends Component {
   state = {
-    zip: "",
-    radius: ""
+    zip: '',
+    radius: ''
   };
 
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-    })
+    });
   };
 
   handleSubmit = e => {
@@ -22,28 +22,41 @@ class Zips extends Component {
     let newZip = this.state.zip;
     let newRadius = this.state.radius;
     this.props.zipMovies(newZip, newRadius);
-    this.props.history.push('/movies')
+    this.props.history.push('/movies');
   };
 
-  render(){
+  render() {
     let { zip, radius } = this.state;
-    return(
-        <Segment textAlign='center' id='form'>
-          <h1>Find Movies:</h1>
-          <Form onSubmit={this.handleSubmit} >
-            <Form.Input label="Enter Zip Code" type="text" placeholder="zip code" name="zip" value={zip} onChange={this.handleChange}/>
-            <Form.Input label="Enter Radius (miles)" type="text" placeholder="radius" name="radius" value={radius} onChange={this.handleChange}/>
-            <Form.Button content="submit" color='purple'/>
-          </Form>
-        </Segment>
-    )
+    return (
+      <Segment textAlign='center' id='form'>
+        <h1>Find Movies:</h1>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Input
+            label='Enter Zip Code'
+            type='text'
+            placeholder='zip code  -  ex: 11231'
+            name='zip'
+            value={zip}
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            label='Enter Radius (miles)'
+            type='text'
+            placeholder='radius  -  ex: 2'
+            name='radius'
+            value={radius}
+            onChange={this.handleChange}
+          />
+          <Form.Button content='submit' color='purple' />
+        </Form>
+      </Segment>
+    );
   }
 }
 
-const mapState = (state) => {
-  return {
-    user: state.userData.user
-  }
-};
-
-export default withRouter(connect(mapState, { zipMovies })(Zips))
+export default withRouter(
+  connect(
+    null,
+    { zipMovies }
+  )(Zips)
+);
