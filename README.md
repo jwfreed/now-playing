@@ -1,12 +1,12 @@
 # ** NowPlaying **
 
-- Purpose \*
+- Purpose 
 
 ---
 
 - This app was built as an exercise in learning Redux. It allows users to find films that are currently playing at cinemas within a specified radius of a given zipcode - much like Fandango.
 
-* Architecture \*
+* Architecture 
 
 ---
 
