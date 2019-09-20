@@ -18,7 +18,15 @@ Install dependencies:
 ```
 npm i
 ```
-Run the local server:
+For movie showtimes, head over to Gracenotes for an API key:
+```
+http://developer.tmsapi.com/docs/read/data_v1_1/movies/Movie_showtimes
+```
+For posters, head over to TMDB for an API key:
+```
+https://developers.themoviedb.org/3/getting-started/introduction
+```
+After adding API keys to your .env file, run the local server:
 ```
 npm start
 ```
